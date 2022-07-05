@@ -1,29 +1,31 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import CartItem from '../CartItem';
+import CartItem from './CartItem';
 import { getProducts } from '../store/actions/productAction';
-
+import Filter from './Filter';
 
 const Home = () => {
-    const { productItems, isLoading,filterItems,error } = useSelector(state => state.products);
+   
+    const { productItems, isLoading,filterItems } = useSelector(state => state.products);
 
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(getProducts())
-    }, [dispatch]);
+        // eslint-disable-next-line
+    }, []);
 
     //{error && <p className='aler aler-danger'>  {error} </p> 
 
     return (
         <div className='container'>
-          
+           <Filter items ={productItems} filterItems={filterItems} />
             {isLoading ? (<p> data is loading .... </p>)
                 : (
-                    productItems.length > 0 ?
+                    filterItems.length > 0 ?
                         (
                             <div className='row'>
                                 {
-                                    productItems.map((item) => {
+                                    filterItems.map((item) => {
                                         return <div key={item.id} className='col-4 mb-5'> <CartItem item={item} /> </div>
                                     })
                                 }

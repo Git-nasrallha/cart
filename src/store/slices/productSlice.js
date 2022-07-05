@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { filterProducts, getProducts } from "../actions/productAction";
+import { filterProducts, getProducts ,sortProducts } from "../actions/productAction";
 
 
 
@@ -22,22 +22,38 @@ const productSlice = createSlice({
         [getProducts.fulfilled]:(state,action)=>{
             state.isLoading =false
             state.productItems = action.payload
+            state.filterItems = action.payload
             state.error = null
         },
         [getProducts.rejected]:(state,action)=>{
             state.isLoading = false
             state.error = action.payload
         },
-        //filter products
+        //filter products by size
         [filterProducts.pending]:(state)=>{
             state.isLoading= true
             state.error = null
         },
         [filterProducts.fulfilled]:(state,action)=>{
-            state.isLoading =false;
-           state.filterItems = action.payload
-            state.error=null
+            state.isLoading = false
+            state.filterItems = action.payload
+            state.error = null
+        },    
+        [sortProducts.rejected]:(state,action)=>{
+            state.isLoading = false
+            state.error = action.payload
         },
+        //sort products 
+        [sortProducts.pending]:(state)=>{
+            state.isLoading= true
+            state.error = null
+        },
+        [sortProducts.fulfilled]:(state,action)=>{
+            state.isLoading = false
+            state.filterItems = action.payload
+            state.error = null
+            console.log(action)
+        },    
         [filterProducts.rejected]:(state,action)=>{
             state.isLoading = false
             state.error = action.payload

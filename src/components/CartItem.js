@@ -1,17 +1,20 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 const CartItem = (props) => {
-    const { image, title, price } = props.item;
+    const { image, title, price ,id} = props.item;
     return (
         <Item>
             <div className="card">
                 <img src={image} className="card-img-top" alt={title} />
                 <div className="card-body pb-0">
-                    <h5 className="card-title">{title} </h5>
+                    <Link to={`/product/${id}`}>
+                        <h5 className="card-title">{title} </h5>
+                    </Link>
                     <div className='d-flex justify-content-between'>
                         <p className="card-text mt-2"> {`${price} $`} </p>
-                        <button className="btn btn-primary py-1">Add To cart</button>
+                        <Link className="btn btn-primary py-1" to={`/cart/${id}`} >Add To cart</Link>
                     </div>
                 </div>
             </div>

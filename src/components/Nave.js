@@ -25,7 +25,6 @@ const Nave = () => {
                     <div className="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                            <NaveLink to="/" lable="home"/>
-                           <NaveLink to="/product" lable="product"/>
                            <NaveLink to="/cart" lable="carts"/>
                         </ul>
                         <Link to='/admin' >admin </Link>

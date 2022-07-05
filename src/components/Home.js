@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import CartItem from '../CartItem';
+import CartItem from './CartItem';
 import { getProducts } from '../store/actions/productAction';
-
+import Filter from './Filter';
 
 const Home = () => {
-    const { productItems, isLoading,filterItems,error } = useSelector(state => state.products);
+   
+    const { productItems, isLoading,filterItems } = useSelector(state => state.products);
 
     const dispatch = useDispatch();
     useEffect(() => {
@@ -16,7 +17,7 @@ const Home = () => {
 
     return (
         <div className='container'>
-          
+           <Filter items ={productItems}/>
             {isLoading ? (<p> data is loading .... </p>)
                 : (
                     productItems.length > 0 ?

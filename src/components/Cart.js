@@ -1,21 +1,22 @@
-import React  from 'react';
+import React from 'react';
 import styled from "styled-components";
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { getItem } from '../helperMethod/methods';
+import FormAddToCart from './FormAddToCart';
 
-const Product = () => {
+const Cart = () => {
   const { productItems } = useSelector(state => state.products);
-  const {id} = useParams();
+  const { id } = useParams();
 
   const item = getItem(productItems, id);
   const { image, title, discription, price, avalbelSize } = item;
 
   return (
-    <ProductStyle className="container mt-3">
+    <CartStyle className="container mt-3">
       <div className='row'>
         <div className='col-6'>
-          <img src={image} alt={title} />
+          <img src={image} className="mr-5" alt={title} />
         </div>
         <div className='col-6'>
           <div className="card text-capitalize">
@@ -32,18 +33,18 @@ const Product = () => {
               </ul>
             </div>
           </div>
-
+          <FormAddToCart avalbelSize={avalbelSize} price={price} />
         </div>
       </div>
-    </ProductStyle>
+    </CartStyle>
   );
 }
 
-export default Product;
-const ProductStyle = styled.div`
+export default Cart;
+const CartStyle = styled.div`
   img{
-      height: 450px;
-      width: 100%;
+      height: 470px;
+      width: 90%;
       border-radius: 20px;
       box-shadow: 14px -4px 6px #ccc;
   }

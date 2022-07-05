@@ -11,20 +11,21 @@ const Home = () => {
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(getProducts())
-    }, [dispatch]);
+        // eslint-disable-next-line
+    }, []);
 
     //{error && <p className='aler aler-danger'>  {error} </p> 
 
     return (
         <div className='container'>
-           <Filter items ={productItems}/>
+           <Filter items ={productItems} filterItems={filterItems} />
             {isLoading ? (<p> data is loading .... </p>)
                 : (
-                    productItems.length > 0 ?
+                    filterItems.length > 0 ?
                         (
                             <div className='row'>
                                 {
-                                    productItems.map((item) => {
+                                    filterItems.map((item) => {
                                         return <div key={item.id} className='col-4 mb-5'> <CartItem item={item} /> </div>
                                     })
                                 }

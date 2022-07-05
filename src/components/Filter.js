@@ -1,13 +1,13 @@
-import React ,{useState} from 'react';
+import React  from 'react';
 import { useDispatch } from 'react-redux/es/exports';
 import styled from 'styled-components'
 import { getUniqueSize } from '../helperMethod/methods';
-import { filterProducts } from '../store/actions/productAction';
+import { filterProducts , sortProducts } from '../store/actions/productAction';
 
 
 
 const Filter = (props) => {
-const {items} = props;
+const {items ,filterItems} = props;
 // get address size steps
 
 // get array size from items
@@ -21,21 +21,19 @@ let uniqueSize = getUniqueSize(sizes);
 uniqueSize = ["All" , ...uniqueSize];
 //state of size
 const dispatch = useDispatch();
-// change select value and excute filterProduct function
-const handelChange =(e)=>{
-      dispatch( filterProducts(e.target.value));
-   
-}
+
+
+
 
     return (
         <FilterApp className='container filter-component mt-2'>
             <ul className='filter list-unstyled d-flex justify-content-between text-capitalize'>
-                <li> <span> {items.length } </span> products  </li>
+                <li> <span> {filterItems.length } </span> products  </li>
                 <li>
                     <span> size</span>
                     <select
                          className="form-select form-select-lg mb-3"
-                         onChange={handelChange} 
+                         onChange={(e)=>dispatch( filterProducts(e.target.value))} 
                          >
                         {uniqueSize.map((size , index)=>{
                             return <option key={index} value={size}>{size}</option>
@@ -44,8 +42,13 @@ const handelChange =(e)=>{
                 </li>
                 <li>
                     <span> order</span>
-                    <select className="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
-                        <option value="hightest">hightest </option>
+                    <select
+                      className="form-select form-select-lg mb-3"
+                      aria-label=".form-select-lg example"
+                      onChange={(e)=>dispatch(sortProducts(e.target.value))}
+                      >
+                        <option value="latest">latest </option>
+                        <option value="higtest">hightest </option>
                         <option value="lowest"> lowest </option>
                     </select>
                 </li>

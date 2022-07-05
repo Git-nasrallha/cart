@@ -8,6 +8,6 @@ export const getUniqueSize = (array)=>{
 
 //get product by id
 export const getItem=(arr,id)=>{
-    const item = arr.find(a=>a.id == id);
+    const item = arr.find(item=>item.id==id);
     return item;
 }

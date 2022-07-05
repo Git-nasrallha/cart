@@ -9,12 +9,12 @@ const CartItem = (props) => {
             <div className="card">
                 <img src={image} className="card-img-top" alt={title} />
                 <div className="card-body pb-0">
-                    <Link to={`/products/${id}`}>
+                    <Link to={`/product/${id}`}>
                         <h5 className="card-title">{title} </h5>
                     </Link>
                     <div className='d-flex justify-content-between'>
                         <p className="card-text mt-2"> {`${price} $`} </p>
-                        <button className="btn btn-primary py-1">Add To cart</button>
+                        <Link className="btn btn-primary py-1" to={`/cart/${id}`} >Add To cart</Link>
                     </div>
                 </div>
             </div>

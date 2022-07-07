@@ -1,30 +1,50 @@
 import React,{useState} from 'react';
+import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
-const FormAddToCart = (props) => {
+import { useNavigate } from "react-router-dom";
+import { addToCart } from '../store/actions/cartAction';
 
-    const { avalbelSize ,price} = props;
+const FormAddToCart = (props) => {
+    const { item} = props;
+    const {avalbelSize ,price} = item;
+    const navigate = useNavigate();
+       
     const [cartValues ,setCartValues] = useState({
         size:'',
         qauntity:1
-
     });
+   
+    //dispatch
+    const dispatch = useDispatch();
+    // calculate total price
      parseInt(cartValues.qauntity , price);
      const total = Math.trunc(cartValues.qauntity * price);
+
     // handel cart change
     const handelChange =(e)=>{
         setCartValues({...cartValues,[e.target.name]:e.target.value});
-    }
-  
+    };
+   
     // on submit function
-    const handelSubmit =(event)=>{
+     const handelSubmit =(event)=>{
         event.preventDefault();
-        console.log(cartValues)
+       // get size and qauntity to push in item
+       const {size , qauntity} = cartValues;
+       // add size and qauntity to item
+       const newItem = Object.assign({...item,size , qauntity,total});
+        // excute dispatch add to cart
+      
+        dispatch(addToCart(newItem)) ;
+
+       // reset cart value
         setCartValues({
             ...cartValues,
             size:'',
             qauntity:1
-        })
-    }
+        });
+        // redirect carts page
+        navigate('/carts');
+     }
 
     return (
         <FormAdd>
@@ -88,5 +108,6 @@ const FormAdd = styled.div`
     font-size: 15px;
     margin-left: 10px;
     background-size: 9px 20px;
+}
 `
 
